@@ -1,1 +1,10 @@
-
+add_executable(Snake
+Board.h
+example.h
+FoodGenerator.h
+GameEntity.h
+Game.h
+Renderer.h
+Segment.h
+        ../src/Snake.cpp
+        Snake.h)
