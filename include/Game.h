@@ -1,14 +1,27 @@
-//
-// Created by Катя Елкина on 24.02.2026.
-//
-
-#ifndef SNAKE_GAME_H
-#define SNAKE_GAME_H
+#pragma once
+#include "Renderer.h"
+#include "FoodGenerator.h"
+#include "Board.h"
 
 
 class Game
 {
+private:
+    Board board;
+    FoodGenerator foodgenerator;
+    Renderer renderer;
+    bool running;
+
+public:
+    Game(int width = 20, int height = 15);
+
+    void handleInput();
+
+    void update();
+
+    void render() const;
+
+    bool isRunning();
+
+    void run();
 };
-
-
-#endif //SNAKE_GAME_H

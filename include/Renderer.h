@@ -1,14 +1,17 @@
-//
-// Created by Катя Елкина on 24.02.2026.
-//
-
-#ifndef SNAKE_RENDERER_H
-#define SNAKE_RENDERER_H
-
+#pragma once
+#include "Board.h"
 
 class Renderer
 {
+private:
+    const Board& board;
+
+public:
+    Renderer(const Board& newboard);
+
+    void render() const;
+
+    void renderGameOver() const;
+
+    void clearScreen();
 };
-
-
-#endif //SNAKE_RENDERER_H
