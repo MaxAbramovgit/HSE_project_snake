@@ -7,4 +7,6 @@ Game.h
 Renderer.h
 Segment.h
         ../src/Snake.cpp
-        Snake.h)
+        Snake.h
+        ../src/GameField.cpp
+        GameField.h)
