@@ -11,4 +11,5 @@ add_executable(src example.cpp
         ../include/Segment.h
         Snake.cpp
         ../include/Snake.h
+        ../main.cpp
 )

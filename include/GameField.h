@@ -5,15 +5,11 @@ protected:
     int height;
     int width;
 public:
-    GameField(int x, int y) :width(x), height(y){}
+    GameField(int x, int y);
 
-    virtual int GetWidth() const {
-        return width;
-    }
+    virtual int GetWidth();
 
-    virtual int GetHeight() const {
-        return height;
-    }
+    virtual int GetHeight();
 
     virtual ~GameField() = default;
 };

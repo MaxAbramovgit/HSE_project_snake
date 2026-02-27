@@ -9,8 +9,4 @@ Segment.h
         ../src/Snake.cpp
         Snake.h
         ../src/GameField.cpp
-        GameField.h
-        ../src/Food.cpp
-        Food.h
-        ../src/FoodTypes.cpp
-        FoodTypes.h)
+        GameField.h)

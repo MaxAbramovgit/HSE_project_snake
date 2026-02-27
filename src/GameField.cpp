@@ -3,3 +3,13 @@
 //
 
 #include "../include/GameField.h"
+
+GameField::GameField(int w, int h) : width(w), height(h) {}
+
+int GameField::GetWidth() {
+    return width;
+}
+
+int GameField::GetHeight() {
+    return height;
+}

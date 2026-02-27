@@ -11,32 +11,26 @@ class Board : GameField {
     std::unique_ptr<Snake> snake;
     std::unique_ptr<Food> food;
     bool over;
+    size_t score;
 public:
-    Board(int x, int y) : GameField(x, y) {
-            std::make_unique<Snake>(x/2, y/2);
-            food = nullptr;
-            over = false;
-    }
+    Board(int x, int y);
 
     int GetHeight() const override;
     int GetWidth() const override;
 
-    Snake& getSnake() const {
-        return *snake;
-    }
+    Snake& getSnake() const;
 
-    Food* getFood() const {
-        return food;
-    }
+    Food* getFood();
 
-    bool isGameOver() const {
-        return over;
-    }
+    bool isGameOver() const;
 
-    void setFood(std::unique_ptr<Food> food) {
-        this->food = std::move(food);
-    }
+    void setFood(std::unique_ptr<Food> food);
 
+    ~Board() = default;
+
+    void update();
+
+    int getScore() const;
     //сделаю еще пару главных методов попозже
 
 };
