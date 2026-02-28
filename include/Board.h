@@ -7,7 +7,7 @@
 #include "Snake.h"
 #include "Food.h"
 
-class Board : GameField {
+class Board : public GameField {
     std::unique_ptr<Snake> snake;
     std::unique_ptr<Food> food;
     bool over;
@@ -20,7 +20,7 @@ public:
 
     Snake& getSnake() const;
 
-    Food* getFood();
+    Food* getFood() const;
 
     bool isGameOver() const;
 
