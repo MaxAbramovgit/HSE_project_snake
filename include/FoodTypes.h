@@ -3,7 +3,7 @@
 #include "Board.h"
 #include "GameEntity.h"
 
-class FoodTypes : GameEntity {
+class FoodTypes : public Food {
 public:
     enum class Type {
         BANANA,
@@ -13,4 +13,6 @@ public:
     };
     Type food_type;
     FoodTypes(int x, int y, Type R);
-    int GetPoints();
+    int GetPoints() const override;
+    char GetSymbol() const override;
+};

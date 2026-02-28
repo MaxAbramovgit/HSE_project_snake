@@ -12,4 +12,6 @@ add_executable(src example.cpp
         Snake.cpp
         ../include/Snake.h
         ../main.cpp
+        FoodTypes.cpp
+        Food.cpp
 )
