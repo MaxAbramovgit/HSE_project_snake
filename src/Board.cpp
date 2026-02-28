@@ -1,4 +1,5 @@
 #include "../include/Board.h"
+#include "../include/Snake.h"
 
 
 Board::Board(int x, int y)  : GameField(x, y) {
@@ -33,4 +34,19 @@ void Board::update() {
         return;
     }
     snake->move();
+    int headX = snake->getHeadX();
+    int headY = snake->getHeadY();
+    if (headX < 0 || headX >= getWidth() || headY < 0 || headY >= getHeight()) {
+        over = true;
+        return;
+    }
+    if (snake->collidesWithSelf()) {
+        over = true;
+        return;
+    }
+    if (headX == food->getX() && headY == food->getY()) {
+        food->applyEffect(*snake);
+        score += 10;
+        food.reset();
+    }
 }

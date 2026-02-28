@@ -5,7 +5,7 @@
 #include <vector>
 #include <utility>
 #include "Snake.h"
-#incude "Food.h" //кто занимается едой, сделайте пж этот класс, у меня еще генератор еды будет
+#include "Food.h"
 
 class Board : GameField {
     std::unique_ptr<Snake> snake;
