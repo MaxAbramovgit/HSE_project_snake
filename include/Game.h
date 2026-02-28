@@ -14,7 +14,6 @@ private:
 
 public:
     Game(int width = 20, int height = 15);
-
     void handleInput();
 
     void update();
