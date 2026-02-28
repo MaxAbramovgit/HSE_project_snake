@@ -80,6 +80,8 @@ bool Snake::collidesWith(int x, int y) const {
 }
 
 bool Snake::collidesWithSelf() const {
+    if (body.empty()) return false;
+
     auto head = body.front().get();
     return std::any_of(body.begin() + 1, body.end(), [head](const auto& segment) {
         return segment->getX() == head->getX() && segment->getY() == head->getY();
