@@ -2,17 +2,8 @@
 
 #include "GameEntity.h"
 
-enum class SegmentType { NORMAL, GHOST };
-
 class Segment : public GameEntity {
-    SegmentType type;
-
 public:
-    Segment(int startX, int startY, SegmentType t = SegmentType::NORMAL);
-    
-    SegmentType getType() const;
-
-    void setType(SegmentType t);
-    
+    Segment(int startX, int startY);
     char getSymbol() const override;
 };
