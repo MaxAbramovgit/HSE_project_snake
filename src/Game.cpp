@@ -1,70 +1,115 @@
 #include <iostream>
-#include "Game.h"
+#include "../include/Game.h"
+#include "../include/Snake.h"
+#include <thread>
+#include <chrono>
 
 
-class Game
+Game::Game(int width, int height) : board(width, height), foodgenerator(), renderer(board, 30), running(true) { }
+
+void Game::handleInput()
 {
-    Game::Game(int width, int height) : board(width, height), foodgenerator(width, height), renderer(board), running(true) { }
-
-    void Game::handleInput()
+    sf::Event event;
+    while (renderer.pollEvent(event))
     {
-        char input;
-        std::cin >> input;
-
-        auto& snake = board.getSnake();
-
-        if (input == "w" || input == "W")
-        {
-            snake.setDirection(Direction::UP);
-        }
-
-        if (input == "s" || input == "S")
-        {
-            snake.setDirection(Direction::DOWN);
-        }
-
-        if (input == "a" || input == "A")
-        {
-            snake.setDirection(Direction::LEFT);
-        }
-
-        if (input == "d" || input == "D")
-        {
-            snake.setDirection(Direction::RIGHT);
-        }
-
-        if (input == "q" || input == "Q")
+        if (event.type == sf::Event::Closed)
         {
             running = false;
+            renderer.close();
         }
-    }
 
-    void Game::update()
-    {
-        board.update();
-
-        if (board.getFood() == nullptr && !(board.isGameOver()))
+        if (event.type == sf::Event::KeyPressed)
         {
-            auto addFood = foodgenerator.generateFoodNotOnSnake(board.getSnake());
-            board.setFood(std::move(addFood));
+            Snake& snake = board.getSnake();
+
+            if (!snake.isAlive())
+            {
+                continue;
+            }
+
+            switch(event.key.code)
+            {
+            case sf::Keyboard::W:
+            case sf::Keyboard::Up:
+                snake.setDirection(Direction::UP);
+                break;
+            case sf::Keyboard::S:
+            case sf::Keyboard::Down:
+                snake.setDirection(Direction::DOWN);
+                break;
+            case sf::Keyboard::A:
+            case sf::Keyboard::Left:
+                snake.setDirection(Direction::LEFT);
+                break;
+            case sf::Keyboard::D:
+            case sf::Keyboard::Right:
+                snake.setDirection(Direction::RIGHT);
+                break;
+            case sf::Keyboard::Q:
+            case sf::Keyboard::Escape:
+                running = false;
+                renderer.close();
+                break;
+            default:
+                break;
+            }
         }
     }
+}
 
-    void Game::render() const
+void Game::update()
+{
+    if (!running)
+    {
+        return true;
+    }
+
+    board.update();
+
+    if (board.getFood() == nullptr && !board.isGameOver())
+    {
+        auto newFood = foodgenerator.generate(board);
+        if (newFood)
+        {
+            board.setFood(std::move(newFood));
+        }
+    }
+}
+
+void Game::render() const
+{
+    if (renderer.isOpen())
     {
         renderer.render();
     }
+}
 
-    bool Game::isRunning()
-    {
-        return (running && !(board.isGameOver));
-    }
+bool Game::isRunning()
+{
+    return (running && !board.isGameOver() && renderer.isOpen());
+}
 
-    void Game::run()
+void Game::run()
+{
+    const int frameDelay = 100; // 100 миллисекунд будет между кадрами
+
+    while(isRunning())
     {
-        while(isRunning)
+        auto startTime = std::chrono::steady_clock::now();
+
+        handleInput();
+        update();
+        render();
+
+        auto endTime = std::chrono::steady_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+
+        if (elapsed.count() < frameDelay)
         {
-
+            std::this_thread::sleep_for(std::chrono::milliseconds(frameDelay - elapsed.count()));
         }
     }
-};
+
+    renderer.renderGameOver();
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+}

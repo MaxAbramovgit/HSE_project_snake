@@ -1,17 +1,19 @@
-add_executable(src example.cpp
+target_sources(Snake PRIVATE
+        main.cpp
         Game.cpp
-        ../include/Game.h
         Board.cpp
-        ../include/Board.h
-        FoodGenerator.cpp
-        ../include/FoodGenerator.h
-        GameEntity.cpp
-        ../include/GameEntity.h
-        Segment.cpp
-        ../include/Segment.h
         Snake.cpp
+<<<<<<< HEAD
         ../include/Snake.h
         ../main.cpp
         FoodTypes.cpp
         Food.cpp
+=======
+        Segment.cpp
+        Food.cpp
+        FoodGenerator.cpp
+        GameEntity.cpp
+        GameField.cpp
+        Renderer.cpp
+>>>>>>> fc63686 (Remove SFML folder from root and update gitignore)
 )

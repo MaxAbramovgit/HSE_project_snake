@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 add_executable(Snake
 Board.h
 example.h
@@ -12,3 +13,5 @@ Segment.h
         GameField.h
         FoodTypes.h
         ../src/Food.cpp)
+=======
+>>>>>>> fc63686 (Remove SFML folder from root and update gitignore)

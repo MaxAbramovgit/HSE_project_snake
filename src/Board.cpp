@@ -16,8 +16,13 @@ Snake& Board::getSnake() const {
     return *snake;
 }
 
+<<<<<<< HEAD
 Food* Board::getFood() const {
     return food.get();
+=======
+Food* Board::getFood() {
+    return food;
+>>>>>>> fc63686 (Remove SFML folder from root and update gitignore)
 }
 
 bool Board::isGameOver() const {

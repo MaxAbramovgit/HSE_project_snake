@@ -1,63 +1,124 @@
 #include <iostream>
-#include "Renderer.h"
-#include "Board.h"
-#include "Food.h"
-#include "FoodType.h"
+#include <vector>
+#include "../include/Renderer.h"
+#include "../include/Board.h"
+#include "../include/Food.h"
+#include "../include/FoodTypes.h"
 
 
-class Renderer
+Renderer::Renderer(const Board& newboard, int cellSize)
+    : board(newboard),
+    cellSize(cellSize),
+    window(sf::VideoMode(newboard.GetWidth() * cellSize,
+        newboard.GetHeight() * cellSize, "Snake Game")
 {
-    Renderer::Renderer(const Board& newboard) : board(newboard) { }
-
-    void Renderer::clearScreen()
+    if (!font.loadFromFile("Arial.ttf"))
     {
-        system("clear");
+        std::cerr << "Warning: could not load Arial.ttf" << std::endl;
     }
 
-    void Renderer::render() const
+    scoreText.setFont(font);
+    scoreText.setCharacterSize(20);
+    scoreText.setFillColor(sf::Color::White);
+    scoreText.setPosition(10, 10);
+
+    gameOverText.setFont(font);
+    gameOverText.setCharacterSize(40);
+    gameOverText.setFillColor(sf::Color::Red);
+    gameOverText.setString("GAME OVER!");
+    gameOverText.setPosition(window.getSize().x / 2 - 100, window.getSize().y / 2 - 20);
+}
+
+void Renderer::render() const
+{
+    window.clear(sf::Color::Black);
+
+    sf::RectangleShape gridLine(sf::Vector2f(cellSize, 1));
+    gridLine.setFillColor(sf::Color(50, 50, 50));
+
+    const auto& snake = board.getSnake();
+    if (snake.isAlive())
     {
-        clearScreen();
+        const auto& body = snake.getBody();
+        sf::RectangleShape cell(sf::Vector2f(cellSize - 2, cellSize - 2));
 
-        std::vector<std::vector<char>> field(height, std::vector<char>(width, '.'));
-
-        for (int i = 0; i < board.getSnake().getBody().size(); ++i)
+        for (size_t i = 0; i < body.size(); ++i)
         {
-            int currentX = board.getSnake().getBody()[i]->getX;
-            int currentY = board.getSnake().getBody()[i]->getY;
+            int x = body[i]->getX;
+            int y = body[i]->getY;
 
-            field[currentY][currentX] = 'Z'; //means that snake is in that place
-        }
+            cell.setPosition(x * cellSize + 1, y * cellSize + 1);
 
-        Food* food = board.getFood();
-        if (board.getFood() != nullptr)
-        {
-            int currentX = board.getFood()->getX;
-            int currentY = board.getFood()->getY;
-
-            if (dynamic_cast<POISONAPPLE*>(food))
+            if (i == 0)
             {
-                field[currentX][currentY] = 'P';
+                cell.setFillColor(sf::Color::Green); // цвет головы будет зеленый
             }
 
-            if (dynamic_cast<BANANA*>(food))
+            else
             {
-                field[currentX][currentY] = 'B';
+                if (body[i]->getType() == SegmentType::GHOST)
+                {
+                    cell.setFillColor(sf::Color(200, 200, 200));
+                }
+
+                else
+                {
+                    cell.setFillColor(sf::Color::Yellow); // цвет тела змейки будет желтым
+                }
             }
 
-            if (dynamic_cast<HAMBURGER*>(food))
-            {
-                field[currentX][currentY] = 'H';
-            }
-
-            if (dynamic_cast<BOMB*>(food))
-            {
-                field[currentX][currentY] = 'B';
-            }
+            window.draw(cell);
         }
     }
 
-    void Renderer::renderGameOver() const
+
+    FoodTypes* food = board.getFood();
+    if (food)
     {
+        sf::RectangleShape cell(sf::Vector2f(cellSize - 2, cellSize - 2));
 
+        cell.setPosition(food->getX() * cellSize + 1, food->getY() * cellSize + 1);
+
+        switch(food->food_type)
+        {
+        case FoodTypes::BANANA:
+            cell.setFillColor(sf::Color::Yellow);
+            break;
+        case FoodTypes::HAMBURGER:
+            cell.setFillColor(sf::Color::Brown)
+            break;
+        case FoodTypes::BOMB:
+            cell.setFillColor(sf::Color::Black);
+            break;
+        case FoodTypes::POIZONAPPLE:
+            cell.setFillColor(sf::Color::Red);
+            break;
+        }
+        window.draw(cell);
     }
-};
+
+    scoreText.setString("Score: " + std::to_string(board.getScore()));
+    window.draw(scoreText);
+    window.display();
+}
+
+void Renderer::renderGameOver() const
+{
+    window.draw(gameOverText);
+    window.display();
+}
+
+bool Renderer::isOpen() const
+{
+    return window.isOpen();
+}
+
+void Renderer::close()
+{
+    window.close();
+}
+
+bool Renderer::pollEvent(sf::Event& event)
+{
+    return window.pollEvent(event);
+}
