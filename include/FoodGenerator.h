@@ -8,6 +8,7 @@
 #include "Board.h"
 
 class FoodGenerator {
+    int a;
 public:
 
 };
