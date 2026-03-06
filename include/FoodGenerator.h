@@ -2,13 +2,13 @@
 #include <memory>
 #include <cstdlib>
 #include <ctime>
-#include <vector>
-#include <utility>
 #include "Food.h"
 #include "Board.h"
 
-class FoodGenerator {
-    int a;
+class FoodGenerator : public GameField {
 public:
+    FoodGenerator(int x, int y);
 
+    std::unique_ptr<Food> generateRandomFood();
+    std::unique_ptr<Food> generateFoodNotOnSnake(const Snake& snake);
 };
