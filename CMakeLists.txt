@@ -19,9 +19,29 @@ set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared libraries" FORCE)
 
 FetchContent_MakeAvailable(sfml)
 
-add_executable(Snake)
-add_subdirectory(src)
-add_subdirectory(include)
+add_executable(Snake
+        src/main.cpp
+        src/Game.cpp
+        src/Board.cpp
+        src/Snake.cpp
+        src/Segment.cpp
+        src/Food.cpp
+        src/FoodTypes.cpp
+        src/FoodGenerator.cpp
+        src/GameEntity.cpp
+        src/GameField.cpp
+        src/Renderer.cpp
+        include/Board.h
+        include/FoodGenerator.h
+        include/GameEntity.h
+        include/Game.h
+        include/Renderer.h
+        include/Segment.h
+        include/Snake.h
+        include/GameField.h
+        include/FoodTypes.h
+        include/Food.h
+)
 
 target_include_directories(Snake PRIVATE include)
 
