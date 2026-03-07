@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../include/Game.h"
 #include "../include/Snake.h"
+#include "../include/FoodGenerator.h"
 #include <thread>
 #include <chrono>
 
