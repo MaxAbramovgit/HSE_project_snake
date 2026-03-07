@@ -11,8 +11,8 @@ public:
         BOMB,
         POISON_APPLE
     };
+private:
     Type food_type;
-    FoodTypes(int x, int y, Type R);
-    int GetPoints() const override;
-    char GetSymbol() const override;
+    FoodTypes(int x, int y, Type type);
+    int GetPoints() const;
 };

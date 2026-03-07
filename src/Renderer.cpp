@@ -4,6 +4,7 @@
 #include "../include/Board.h"
 #include "../include/Food.h"
 #include "../include/FoodTypes.h"
+#include <SFML/Graphics.hpp>
 
 
 Renderer::Renderer(const Board& newboard, int cellSize)
