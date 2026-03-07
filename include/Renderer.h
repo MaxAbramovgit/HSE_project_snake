@@ -9,7 +9,7 @@ private:
     const Board& board;
 
     int cellSize;
-    sf::Front front;
+    sf::Font front;
     sf::Text scoreText;
     sf::Text gameOverText;
 
