@@ -16,3 +16,21 @@ int FoodTypes::GetPoints() const {
     }
     return 0;
 };
+
+void FoodTypes::applyEffect(Snake &snake) {
+    switch (food_type) {
+        case Type::BANANA:
+            snake.grow();
+            break;
+        case Type::HAMBURGER:
+            snake.grow();
+            snake.grow();
+            break;
+        case Type::POISON_APPLE:
+            snake.shrink();
+            break;
+        case Type::BOMB:
+            snake.die();
+            break;
+    }
+}
