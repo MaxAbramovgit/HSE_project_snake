@@ -13,6 +13,6 @@ public:
     };
 private:
     Type food_type;
-    FoodTypes(int x, int y, Type type);
-    int GetPoints() const;
+    FoodTypes(int newX, int newY, Type R);
+    int GetPoints() const override;
 };

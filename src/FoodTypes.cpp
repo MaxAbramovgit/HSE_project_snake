@@ -1,7 +1,7 @@
 #include "../include/FoodTypes.h"
 #include "../include/GameEntity.h"
 #include "../include/Board.h"
-FoodTypes::FoodTypes(int x, int y, Type R) : Food(x, y), food_type(R){}
+FoodTypes::FoodTypes(int newX, int newY, Type R) : Food(newX, newY), food_type(R){}
 
 int FoodTypes::GetPoints() const {
     switch (food_type) {
