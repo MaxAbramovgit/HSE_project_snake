@@ -16,14 +16,10 @@ Snake& Board::getSnake() const {
     return *snake;
 }
 
-<<<<<<< HEAD
 Food* Board::getFood() const {
     return food.get();
-=======
-Food* Board::getFood() {
-    return food;
->>>>>>> fc63686 (Remove SFML folder from root and update gitignore)
 }
+
 
 bool Board::isGameOver() const {
         return over;
@@ -44,9 +40,10 @@ void Board::update() {
     if (snake) {
         snake->move();
     }
-    int headX = snake->getHeadX();
-    int headY = snake->getHeadY();
-    if (headX < 0 || headX >= getWidth() || headY < 0 || headY >= getHeight()) {
+    auto p = snake->getHeadPosition();
+    int headX = p.first;
+    int headY = p.second;
+    if (headX < 0 || headX >= width || headY < 0 || headY >= height) {
         over = true;
         return;
     }
