@@ -9,16 +9,17 @@ private:
     const Board& board;
 
     int cellSize;
-    sf::Font front;
+    sf::Font font;
     sf::Text scoreText;
     sf::Text gameOverText;
+
 
 public:
     explicit Renderer(const Board& newboard, int cellSize = 30);
 
-    void render() const;
-    void renderGameOver() const;
-    bool isOpen();
+    void render();
+    void renderGameOver();
+    bool isOpen() const;
     void close();
     bool pollEvent(sf::Event& event);
 };

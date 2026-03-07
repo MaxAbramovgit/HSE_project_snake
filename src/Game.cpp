@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../include/Game.h"
 #include "../include/Snake.h"
 #include "../include/FoodGenerator.h"
@@ -10,7 +9,7 @@ Game::Game(int width, int height) : board(width, height), foodgenerator(), rende
 
 void Game::handleInput()
 {
-    sf::Event event;
+    sf::Event event = sf::Event();
     while (renderer.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
@@ -62,15 +61,14 @@ void Game::update()
 {
     if (!running)
     {
-        return true;
+        return;
     }
 
     board.update();
 
     if (board.getFood() == nullptr && !board.isGameOver())
     {
-        auto newFood = foodgenerator.generate(board);
-        if (newFood)
+        if (auto newFood = foodgenerator.generate(board);)
         {
             board.setFood(std::move(newFood));
         }
@@ -85,14 +83,14 @@ void Game::render() const
     }
 }
 
-bool Game::isRunning()
+bool Game::isRunning() const
 {
     return (running && !board.isGameOver() && renderer.isOpen());
 }
 
 void Game::run()
 {
-    const int frameDelay = 100; // 100 миллисекунд будет между кадрами
+    constexpr int frameDelay = 100; // 100 миллисекунд будет между кадрами
 
     while(isRunning())
     {

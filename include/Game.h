@@ -22,7 +22,7 @@ public:
 
     void render() const;
 
-    bool isRunning();
+    bool isRunning() const;
 
     void run();
 };

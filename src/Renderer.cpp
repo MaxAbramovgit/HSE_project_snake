@@ -2,16 +2,15 @@
 #include <vector>
 #include "../include/Renderer.h"
 #include "../include/Board.h"
-#include "../include/Food.h"
 #include "../include/FoodTypes.h"
 #include <SFML/Graphics.hpp>
-
 
 Renderer::Renderer(const Board& newboard, int cellSize)
     : board(newboard),
     cellSize(cellSize),
     window(sf::VideoMode(newboard.GetWidth() * cellSize,
-        newboard.GetHeight() * cellSize, "Snake Game")
+        newboard.GetHeight() * cellSize),
+        "Snake Game")
 {
     if (!font.loadFromFile("Arial.ttf"))
     {
@@ -27,28 +26,46 @@ Renderer::Renderer(const Board& newboard, int cellSize)
     gameOverText.setCharacterSize(40);
     gameOverText.setFillColor(sf::Color::Red);
     gameOverText.setString("GAME OVER!");
+
+    float xPos = static_cast<float>(window.getSize().x) / 2.0f - 100.0f;
+    float yPos = static_cast<float>(window.getSize().y) / 2.0f - 20.0f;
     gameOverText.setPosition(window.getSize().x / 2 - 100, window.getSize().y / 2 - 20);
 }
 
-void Renderer::render() const
+void Renderer::render()
 {
     window.clear(sf::Color::Black);
 
-    sf::RectangleShape gridLine(sf::Vector2f(cellSize, 1));
+    sf::RectangleShape gridLine(sf::Vector2f(static_cast<float>(cellSize), 1.0f));
     gridLine.setFillColor(sf::Color(50, 50, 50));
+
+    for (int x = 0; x < board.GetWidth(); ++x)
+    {
+        gridLine.setFillColor(sf::Color(50, 50, 50));
+        window.draw(gridLine);
+    }
+
+    for (int y = 0; y < board.GetHeight(); ++y)
+    {
+        gridLine.setRotation(90.0f);
+        gridLine.setPosition(0.0f, static_cast<float>(y * cellSize));
+
+        window.draw(gridLine);
+        gridLine.setRotation(0.0f);
+    }
 
     const auto& snake = board.getSnake();
     if (snake.isAlive())
     {
         const auto& body = snake.getBody();
-        sf::RectangleShape cell(sf::Vector2f(cellSize - 2, cellSize - 2));
+        sf::RectangleShape cell(sf::Vector2f(static_cast<float>(cellSize - 2), static_cast<float>(cellSize - 2)));
 
         for (size_t i = 0; i < body.size(); ++i)
         {
-            int x = body[i]->getX;
-            int y = body[i]->getY;
+            int x = body[i]->getX();
+            int y = body[i]->getY();
 
-            cell.setPosition(x * cellSize + 1, y * cellSize + 1);
+            cell.setPosition(static_cast<float>(x * cellSize + 1), static_cast<float>(y * cellSize + 1));
 
             if (i == 0)
             {
@@ -57,15 +74,7 @@ void Renderer::render() const
 
             else
             {
-                if (body[i]->getType() == SegmentType::GHOST)
-                {
-                    cell.setFillColor(sf::Color(200, 200, 200));
-                }
-
-                else
-                {
-                    cell.setFillColor(sf::Color::Yellow); // цвет тела змейки будет желтым
-                }
+                cell.setFillColor(sf::Color::Yellow); // цвет тела змейки будет желтым
             }
 
             window.draw(cell);
@@ -76,22 +85,22 @@ void Renderer::render() const
     FoodTypes* food = board.getFood();
     if (food)
     {
-        sf::RectangleShape cell(sf::Vector2f(cellSize - 2, cellSize - 2));
+        sf::RectangleShape cell(sf::Vector2f(static_cast<float>(cellSize - 2), static_cast<float>(cellSize - 2)));
 
-        cell.setPosition(food->getX() * cellSize + 1, food->getY() * cellSize + 1);
+        cell.setPosition(static_cast<float>(food->getX() * cellSize + 1), static_cast<float>(food->getY() * cellSize + 1));
 
         switch(food->food_type)
         {
-        case FoodTypes::BANANA:
+        case FoodTypes::Type::BANANA:
             cell.setFillColor(sf::Color::Yellow);
             break;
-        case FoodTypes::HAMBURGER:
-            cell.setFillColor(sf::Color::Brown)
+        case FoodTypes::Type::HAMBURGER:
+            cell.setFillColor(sf::Color(165, 42, 42));
             break;
-        case FoodTypes::BOMB:
-            cell.setFillColor(sf::Color::Black);
+        case FoodTypes::Type::BOMB:
+            cell.setFillColor(sf::Color::Blue);
             break;
-        case FoodTypes::POIZONAPPLE:
+        case FoodTypes::Type::POISON_APPLE:
             cell.setFillColor(sf::Color::Red);
             break;
         }
@@ -103,13 +112,13 @@ void Renderer::render() const
     window.display();
 }
 
-void Renderer::renderGameOver() const
+void Renderer::renderGameOver()
 {
     window.draw(gameOverText);
     window.display();
 }
 
-bool Renderer::isOpen() const
+bool Renderer::isOpen()
 {
     return window.isOpen();
 }
