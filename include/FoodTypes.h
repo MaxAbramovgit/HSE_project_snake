@@ -11,7 +11,7 @@ public:
         BOMB,
         POISON_APPLE
     };
-private:
+protected:
     Type food_type;
     FoodTypes(int newX, int newY, Type R);
     int GetPoints() const override;
