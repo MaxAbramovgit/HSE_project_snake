@@ -5,11 +5,11 @@
 #include "../include/FoodTypes.h"
 #include <SFML/Graphics.hpp>
 
-Renderer::Renderer(const Board& newboard, int cellSize)
-    : board(newboard),
+Renderer::Renderer(const Board& otherboard, int cellSize)
+    : board(otherboard),
     cellSize(cellSize),
-    window(sf::VideoMode(newboard.GetWidth() * cellSize,
-        newboard.GetHeight() * cellSize),
+    window(sf::VideoMode(otherboard.GetWidth() * cellSize,
+        otherboard.GetHeight() * cellSize),
         "Snake Game")
 {
     if (!font.loadFromFile("Arial.ttf"))
@@ -29,7 +29,8 @@ Renderer::Renderer(const Board& newboard, int cellSize)
 
     float xPos = static_cast<float>(window.getSize().x) / 2.0f - 100.0f;
     float yPos = static_cast<float>(window.getSize().y) / 2.0f - 20.0f;
-    gameOverText.setPosition(window.getSize().x / 2 - 100, window.getSize().y / 2 - 20);
+    gameOverText.setPosition(static_cast<float>(window.getSize().x) / 2.0f - 100.0f,
+        static_cast<float>(window.getSize().y) / 2.0f - 20.0f);
 }
 
 void Renderer::render()
@@ -82,7 +83,7 @@ void Renderer::render()
     }
 
 
-    FoodTypes* food = board.getFood();
+    auto* food = dynamic_cast<FoodTypes*>(board.getFood());
     if (food)
     {
         sf::RectangleShape cell(sf::Vector2f(static_cast<float>(cellSize - 2), static_cast<float>(cellSize - 2)));

@@ -5,10 +5,10 @@
 class Renderer
 {
 private:
-    sf::RenderWindow window;
     const Board& board;
-
     int cellSize;
+    sf::RenderWindow window;
+
     sf::Font font;
     sf::Text scoreText;
     sf::Text gameOverText;
