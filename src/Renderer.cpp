@@ -27,8 +27,6 @@ Renderer::Renderer(const Board& otherboard, int cellSize)
     gameOverText.setFillColor(sf::Color::Red);
     gameOverText.setString("GAME OVER!");
 
-    float xPos = static_cast<float>(window.getSize().x) / 2.0f - 100.0f;
-    float yPos = static_cast<float>(window.getSize().y) / 2.0f - 20.0f;
     gameOverText.setPosition(static_cast<float>(window.getSize().x) / 2.0f - 100.0f,
         static_cast<float>(window.getSize().y) / 2.0f - 20.0f);
 }
@@ -90,7 +88,7 @@ void Renderer::render()
 
         cell.setPosition(static_cast<float>(food->getX() * cellSize + 1), static_cast<float>(food->getY() * cellSize + 1));
 
-        switch(food->food_type)
+        switch(food->getType())
         {
         case FoodTypes::Type::BANANA:
             cell.setFillColor(sf::Color::Yellow);
@@ -119,7 +117,7 @@ void Renderer::renderGameOver()
     window.display();
 }
 
-bool Renderer::isOpen()
+bool Renderer::isOpen() const
 {
     return window.isOpen();
 }

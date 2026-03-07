@@ -20,7 +20,7 @@ public:
 
     void update();
 
-    void render() const;
+    void render();
 
     bool isRunning() const;
 

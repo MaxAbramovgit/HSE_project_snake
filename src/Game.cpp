@@ -68,14 +68,14 @@ void Game::update()
 
     if (board.getFood() == nullptr && !board.isGameOver())
     {
-        if (auto newFood = foodgenerator.generate(board);)
+        if (auto newFood = foodgenerator.generate(board))
         {
             board.setFood(std::move(newFood));
         }
     }
 }
 
-void Game::render() const
+void Game::render()
 {
     if (renderer.isOpen())
     {
