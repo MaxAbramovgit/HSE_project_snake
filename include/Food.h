@@ -1,5 +1,4 @@
 #pragma once
-#include <memory>
 #include "GameEntity.h"
 
 class Food : public GameEntity {

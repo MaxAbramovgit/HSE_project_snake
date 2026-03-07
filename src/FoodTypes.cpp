@@ -1,5 +1,5 @@
 #include "../include/FoodTypes.h"
-#include "../include/GameEntity.h"
+#include "Food.h"
 #include "../include/Board.h"
 FoodTypes::FoodTypes(int newX, int newY, Type R) : Food(newX, newY), food_type(R){}
 
