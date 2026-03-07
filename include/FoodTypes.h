@@ -11,6 +11,7 @@ public:
         BOMB,
         POISON_APPLE
     };
+    Type getType() const{return food_type};
 protected:
     Type food_type;
     FoodTypes(int newX, int newY, Type R);
