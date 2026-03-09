@@ -1,4 +1,5 @@
 #pragma once
+
 #include <deque>
 #include <memory>
 #include "Segment.h"
@@ -35,5 +36,7 @@ public:
     bool isAlive() const;
 
     void addScore(int points);
+
+    void resetScore();
 };
 

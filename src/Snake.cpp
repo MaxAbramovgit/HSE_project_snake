@@ -94,3 +94,7 @@ bool Snake::isAlive() const {
 void Snake::addScore(int points) {
     score += points;
 }
+
+void Snake::resetScore() {
+    score = 0;
+}
