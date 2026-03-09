@@ -35,6 +35,5 @@ public:
     bool isAlive() const;
 
     void addScore(int points);
-    void resetScore();
 };
 
