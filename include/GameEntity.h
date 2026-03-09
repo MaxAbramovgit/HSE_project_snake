@@ -10,7 +10,6 @@ public:
     virtual ~GameEntity() = default;
 
     int getX() const;
-
     int getY() const;
 
     void setPosition(int newX, int newY);
