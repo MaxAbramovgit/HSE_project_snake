@@ -29,6 +29,5 @@ public:
     void update();
 
     int getScore() const;
-    //сделаю еще пару главных методов попозже
 
 };
