@@ -4,7 +4,7 @@
 
 Board::Board(int x, int y)  : GameField(x, y) {
     snake = std::make_unique<Snake>(x/2, y/2);
-    food = nullptr;
+    food = std::vector<std::unique_ptr<Food>>();
     over = false;
     score = 0;
 }
@@ -16,11 +16,13 @@ Snake& Board::getSnake() const {
     return *snake;
 }
 
+void Board::addFood(std::unique_ptr<Food> food) {
+    this->food.push_back(std::move(food));
+}
 
 
-
-Food* Board::getFood() const {
-    return food.get();
+const std::vector<std::unique_ptr<Food>>& Board::getFood() const {
+    return food;
 }
 
 
@@ -36,16 +38,13 @@ int Board::GetHeight() const {
     return height;
 }
 
-void Board::setFood(std::unique_ptr<Food> food) {
-    this->food = std::move(food);
-}
 
 int Board::getScore() const {
     return score;
 }
 
 void Board::update() {
-    if (over == true || food == nullptr) {
+    if (over == true) {
         return;
     }
     if (snake) {
@@ -62,12 +61,19 @@ void Board::update() {
         over = true;
         return;
     }
-    if (headX == food->getX() && headY == food->getY()) {
-        food->applyEffect(*snake);
-        score += 10;
-        food.reset();
+    for (auto it = food.begin(); it != food.end(); ) {
+        if (headX == (*it)->getX() && headY == (*it)->getY()) {
+            (*it)->applyEffect(*snake);
+            score += (*it)->getPoints();
+            it = food.erase(it);
+            return;
+        } else {
+            ++it;
+        }
     }
 
 }
+
+
 
 Board::~Board() {}
