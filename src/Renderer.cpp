@@ -12,7 +12,7 @@ Renderer::Renderer(const Board& otherboard, int cellSize)
         otherboard.GetHeight() * cellSize),
         "Snake Game")
 {
-    if (!font.loadFromFile("Arial.ttf"))
+    if (!font.loadFromFile("arialmt.ttf"))
     {
         std::cerr << "Warning: could not load Arial.ttf" << std::endl;
     }
