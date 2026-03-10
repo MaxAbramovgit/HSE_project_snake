@@ -68,12 +68,12 @@ void Renderer::render()
 
             if (i == 0)
             {
-                cell.setFillColor(sf::Color::Green); // цвет головы будет зеленый
+                cell.setFillColor(sf::Color(0, 100, 0)); // цвет головы будет темно зеленый
             }
 
             else
             {
-                cell.setFillColor(sf::Color::Yellow); // цвет тела змейки будет желтым
+                cell.setFillColor(sf::Color(34, 139, 34)); // цвет тела змейки будет светло-зеленый
             }
 
             window.draw(cell);
