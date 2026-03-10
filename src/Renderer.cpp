@@ -35,23 +35,27 @@ void Renderer::render()
 {
     window.clear(sf::Color::Black);
 
-    sf::RectangleShape gridLine(sf::Vector2f(static_cast<float>(cellSize), 1.0f));
-    gridLine.setFillColor(sf::Color(50, 50, 50));
+    sf::VertexArray grid(sf::Lines);
 
     for (int x = 0; x < board.GetWidth(); ++x)
     {
-        gridLine.setFillColor(sf::Color(50, 50, 50));
-        window.draw(gridLine);
+        float positionX = static_cast<float>(x * cellSize);
+        grid.append(sf::Vertex(sf::Vector2f(positionX, 0.0f),
+            sf::Color::White));
+        grid.append(sf::Vertex(sf::Vector2f(positionX, static_cast<float>(board.GetHeight() * cellSize)),
+            sf::Color::White));
     }
 
     for (int y = 0; y < board.GetHeight(); ++y)
     {
-        gridLine.setRotation(90.0f);
-        gridLine.setPosition(0.0f, static_cast<float>(y * cellSize));
-
-        window.draw(gridLine);
-        gridLine.setRotation(0.0f);
+        float positionY = static_cast<float>(y * cellSize);
+        grid.append(sf::Vertex(sf::Vector2f(0.0f, positionY),
+            sf::Color::White));
+        grid.append(sf::Vertex(sf::Vector2f(static_cast<float>(board.GetWidth() * cellSize), positionY),
+            sf::Color::White));
     }
+
+    window.draw(grid);
 
     const auto& snake = board.getSnake();
     if (snake.isAlive())
@@ -68,12 +72,12 @@ void Renderer::render()
 
             if (i == 0)
             {
-                cell.setFillColor(sf::Color::Green); // цвет головы будет зеленый
+                cell.setFillColor(sf::Color(0, 100, 0)); // цвет головы будет темно зеленый
             }
 
             else
             {
-                cell.setFillColor(sf::Color::Yellow); // цвет тела змейки будет желтым
+                cell.setFillColor(sf::Color(34, 139, 34)); // цвет тела змейки будет светло-зеленый
             }
 
             window.draw(cell);

@@ -7,7 +7,7 @@
 
 Game::Game(int width, int height) : board(width, height),
     foodgenerator(board.GetWidth(), board.GetHeight()),
-    renderer(board, 30),
+    renderer(board, 20),
     running(true) { }
 
 void Game::handleInput()
@@ -93,7 +93,7 @@ bool Game::isRunning() const
 
 void Game::run()
 {
-    constexpr int frameDelay = 100; // 100 миллисекунд будет между кадрами
+    constexpr int frameDelay = 200; // 100 миллисекунд будет между кадрами
 
     while(isRunning())
     {
