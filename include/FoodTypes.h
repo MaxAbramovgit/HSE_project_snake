@@ -15,6 +15,6 @@ private:
     Type food_type;
 public:
     FoodTypes(int newX, int newY, Type R);
-    int getPoints() const;
+    int getPoints() const override;
     void applyEffect(Snake& snake) override;
 };

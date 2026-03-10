@@ -3,7 +3,7 @@
 #include "../include/Board.h"
 FoodTypes::FoodTypes(int newX, int newY, Type R) : Food(newX, newY), food_type(R){}
 
-int FoodTypes::getPoints() const {
+int FoodTypes::getPoints() const{
     switch (food_type) {
         case Type::BANANA:
             return 1;
