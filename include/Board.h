@@ -15,7 +15,7 @@ class Board : public GameField {
 public:
     Board(int x, int y);
 
-    void addFood(std::unique_ptr<Food> food);
+    void addFood(std::unique_ptr<Food> newfood);
 
     int GetHeight() const override;
     int GetWidth() const override;

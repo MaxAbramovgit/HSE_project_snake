@@ -13,13 +13,13 @@ Board::Board(int x, int y)  : GameField(x, y) {
 
 Snake& Board::getSnake() const {
     if (!snake) {
-        throw std::runtime_error("snake is empty");
+        throw std::runtime_error("SNAKE IS EMPTY");
     }
     return *snake;
 }
 
-void Board::addFood(std::unique_ptr<Food> food) {
-    this->food.push_back(std::move(food));
+void Board::addFood(std::unique_ptr<Food> newfood) {
+    food.push_back(std::move(newfood));
 }
 
 
