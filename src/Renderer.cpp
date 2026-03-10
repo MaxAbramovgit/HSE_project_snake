@@ -37,7 +37,7 @@ void Renderer::render()
 
     sf::VertexArray grid(sf::Lines);
 
-    for (int x = 0; x < board.GetWidth(); ++x)
+    for (int x = 0; x <= board.GetWidth(); ++x)
     {
         float positionX = static_cast<float>(x * cellSize);
         grid.append(sf::Vertex(sf::Vector2f(positionX, 0.0f),
@@ -46,7 +46,7 @@ void Renderer::render()
             sf::Color::White));
     }
 
-    for (int y = 0; y < board.GetHeight(); ++y)
+    for (int y = 0; y <= board.GetHeight(); ++y)
     {
         float positionY = static_cast<float>(y * cellSize);
         grid.append(sf::Vertex(sf::Vector2f(0.0f, positionY),
@@ -84,28 +84,32 @@ void Renderer::render()
         }
     }
 
-    if (auto* food = dynamic_cast<FoodTypes*>(board.getFood()))
+
+    for (const std::unique_ptr<Food>& food : board.getFood())
     {
-        sf::RectangleShape cell(sf::Vector2f(static_cast<float>(cellSize - 2), static_cast<float>(cellSize - 2)));
-
-        cell.setPosition(static_cast<float>(food->getX() * cellSize + 1), static_cast<float>(food->getY() * cellSize + 1));
-
-        switch(food->getType())
+        if (auto* foodType = dynamic_cast<FoodTypes*>(food.get()))
         {
-        case FoodTypes::Type::BANANA:
-            cell.setFillColor(sf::Color::Yellow);
-            break;
-        case FoodTypes::Type::HAMBURGER:
-            cell.setFillColor(sf::Color(165, 42, 42));
-            break;
-        case FoodTypes::Type::BOMB:
-            cell.setFillColor(sf::Color::Blue);
-            break;
-        case FoodTypes::Type::POISON_APPLE:
-            cell.setFillColor(sf::Color::Red);
-            break;
+            sf::RectangleShape cell(sf::Vector2f(static_cast<float>(cellSize - 2), static_cast<float>(cellSize - 2)));
+
+            cell.setPosition(static_cast<float>(food->getX() * cellSize + 1), static_cast<float>(food->getY() * cellSize + 1));
+
+            switch(foodType->getType())
+            {
+            case FoodTypes::Type::BANANA:
+                cell.setFillColor(sf::Color::Yellow);
+                break;
+            case FoodTypes::Type::HAMBURGER:
+                cell.setFillColor(sf::Color(165, 42, 42));
+                break;
+            case FoodTypes::Type::BOMB:
+                cell.setFillColor(sf::Color::Blue);
+                break;
+            case FoodTypes::Type::POISON_APPLE:
+                cell.setFillColor(sf::Color::Red);
+                break;
+            }
+            window.draw(cell);
         }
-        window.draw(cell);
     }
 
     scoreText.setString("Score: " + std::to_string(board.getScore()));

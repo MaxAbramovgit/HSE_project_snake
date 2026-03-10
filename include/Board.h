@@ -22,7 +22,7 @@ public:
 
     Snake& getSnake() const;
 
-    FoodTypes* getFood() const;
+    const std::vector<std::unique_ptr<Food>>&  getFood() const;
 
     bool isGameOver() const;
 

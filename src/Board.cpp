@@ -23,7 +23,7 @@ void Board::addFood(std::unique_ptr<Food> food) {
 }
 
 
-FoodTypes* Board::getFood() const {
+const std::vector<std::unique_ptr<Food>>&  Board::getFood() const {
     return food;
 }
 
