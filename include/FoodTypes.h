@@ -10,6 +10,8 @@ public:
         BOMB,
         POISON_APPLE
     };
+    static constexpr int
+    FOOD_TYPE_COUNT = 4;
     Type getType() const{return food_type;}
 private:
     Type food_type;

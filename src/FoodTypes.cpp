@@ -6,13 +6,21 @@ FoodTypes::FoodTypes(int newX, int newY, Type R) : Food(newX, newY), food_type(R
 int FoodTypes::getPoints() const{
     switch (food_type) {
         case Type::BANANA:
-            return 1;
+            constexpr int
+            BANANA_POINTS = 1;
+            return BANANA_POINTS;
         case Type::HAMBURGER:
-            return 2;
+            constexpr int
+            HAMBURGER_POINTS = 2;
+            return HAMBURGER_POINTS;
         case Type::POISON_APPLE:
-            return -1;
+            constexpr int
+            POISON_POINTS = -1;
+            return POISON_POINTS;
         case Type::BOMB:
-            return -3;
+            constexpr int
+            BOMB_POINTS = -3;
+            return BOMB_POINTS;
     }
     return 0;
 };
