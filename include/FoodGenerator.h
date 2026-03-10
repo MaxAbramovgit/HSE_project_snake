@@ -10,5 +10,5 @@ public:
     FoodGenerator(int x, int y);
 
     std::unique_ptr<Food> generateRandomFood();
-    std::unique_ptr<Food> generateFoodNotOnSnake(const Snake& snake);
+    std::unique_ptr<Food> generate(const Snake& snake);
 };

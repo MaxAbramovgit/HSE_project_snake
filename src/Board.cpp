@@ -16,6 +16,9 @@ Snake& Board::getSnake() const {
     return *snake;
 }
 
+
+
+
 Food* Board::getFood() const {
     return food.get();
 }

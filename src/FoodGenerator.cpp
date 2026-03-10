@@ -39,7 +39,7 @@ std::unique_ptr<Food> FoodGenerator::generateRandomFood() {
     return std::make_unique<FoodTypes>(x, y, foodType);
 }
 
-std::unique_ptr<Food> FoodGenerator::generateFoodNotOnSnake(const Snake& snake) {
+std::unique_ptr<Food> FoodGenerator::generate(const Snake& snake) {
     while (true) {
         auto food = generateRandomFood();
         if (!snake.collidesWith(food->getX(), food->getY())) {
