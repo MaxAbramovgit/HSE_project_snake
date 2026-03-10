@@ -5,7 +5,10 @@
 #include <chrono>
 
 
-Game::Game(int width, int height) : board(width, height), foodgenerator(), renderer(board, 30), running(true) { }
+Game::Game(int width, int height) : board(width, height),
+    foodgenerator(board.GetWidth(), board.GetHeight()),
+    renderer(board, 30),
+    running(true) { }
 
 void Game::handleInput()
 {
@@ -68,7 +71,7 @@ void Game::update()
 
     if (board.getFood() == nullptr && !board.isGameOver())
     {
-        if (auto newFood = foodgenerator.generate(board))
+        if (std::unique_ptr<Food> newFood = foodgenerator.generate(board.getSnake()))
         {
             board.setFood(std::move(newFood));
         }

@@ -80,9 +80,7 @@ void Renderer::render()
         }
     }
 
-
-    auto* food = dynamic_cast<FoodTypes*>(board.getFood());
-    if (food)
+    if (auto* food = dynamic_cast<FoodTypes*>(board.getFood()))
     {
         sf::RectangleShape cell(sf::Vector2f(static_cast<float>(cellSize - 2), static_cast<float>(cellSize - 2)));
 
