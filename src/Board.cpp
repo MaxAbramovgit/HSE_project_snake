@@ -2,6 +2,8 @@
 #include "../include/Snake.h"
 #include <iostream>
 
+#include "FoodTypes.h"
+
 Board::Board(int x, int y)  : GameField(x, y) {
     snake = std::make_unique<Snake>(x/2, y/2);
     food = std::vector<std::unique_ptr<Food>>();
@@ -21,7 +23,7 @@ void Board::addFood(std::unique_ptr<Food> food) {
 }
 
 
-const std::vector<std::unique_ptr<Food>>& Board::getFood() const {
+FoodTypes* Board::getFood() const {
     return food;
 }
 

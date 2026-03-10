@@ -5,6 +5,8 @@
 #include "Food.h"
 #include <vector>
 
+#include "FoodTypes.h"
+
 class Board : public GameField {
     std::unique_ptr<Snake> snake;
     std::vector<std::unique_ptr<Food>> food;
@@ -20,7 +22,7 @@ public:
 
     Snake& getSnake() const;
 
-    const std::vector<std::unique_ptr<Food>>& getFood() const;
+    FoodTypes* getFood() const;
 
     bool isGameOver() const;
 

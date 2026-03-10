@@ -8,7 +8,17 @@
 Game::Game(int width, int height) : board(width, height),
     foodgenerator(board.GetWidth(), board.GetHeight()),
     renderer(board, 20),
-    running(true) { }
+    running(true)
+{
+    for (int i = 0; i < 5; ++i)
+    {
+        auto newFood = foodgenerator.generate(board.getSnake());
+        if (newFood)
+        {
+            board.addFood(std::move(newFood));
+        }
+    }
+}
 
 void Game::handleInput()
 {
@@ -67,13 +77,17 @@ void Game::update()
         return;
     }
 
+    int oldFoodCount = board.getFood().size();
     board.update();
 
-    if (board.getFood() == nullptr && !board.isGameOver())
+    int newFoodCount = board.getFood().size();
+
+    if (newFoodCount < oldFoodCount)
     {
-        if (std::unique_ptr<Food> newFood = foodgenerator.generate(board.getSnake()))
+        std::unique_ptr<Food> newFood = foodgenerator.generate(board.getSnake());
+        if (newFood)
         {
-            board.setFood(std::move(newFood));
+            board.addFood(std::move(newFood));
         }
     }
 }
@@ -93,7 +107,7 @@ bool Game::isRunning() const
 
 void Game::run()
 {
-    constexpr int frameDelay = 200; // 100 миллисекунд будет между кадрами
+    constexpr int frameDelay = 200; // 200 миллисекунд будет между кадрами
 
     while(isRunning())
     {
