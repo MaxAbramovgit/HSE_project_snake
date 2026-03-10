@@ -2,10 +2,22 @@
 #include "FoodTypes.h"
 #include <memory>
 #include <cstdlib>
-#include <ctime>
+
+
+int start(int a) {
+    if (a == 1 || a == 2) {
+        return 2;
+    }
+    if (a == 0) {
+        return 3;
+    }
+}
 
 FoodGenerator::FoodGenerator(int w, int h) : GameField(w, h) {
+    counter_gen = 0;
     static bool seeded = false;
+    poisoned_counter = 0;
+    bomb_counter = 0;
     if (!seeded) {
         std::srand(static_cast<unsigned>(std::time(nullptr)));
         seeded = true;
@@ -15,9 +27,27 @@ FoodGenerator::FoodGenerator(int w, int h) : GameField(w, h) {
 std::unique_ptr<Food> FoodGenerator::generateRandomFood() {
     int x = std::rand() % GetWidth();
     int y = std::rand() % GetHeight();
-    int type = std::rand() % 4;
+    int type;
 
     FoodTypes::Type foodType;
+
+    if (counter_gen < 3) {
+        type = start(counter_gen);
+        counter_gen += 1;
+    }
+    else if (bomb_counter > 0) {
+        if (poisoned_counter > 2) {
+            type = std::rand() % 2;
+            poisoned_counter -= 1;
+        }
+        else {
+            type = std::rand() % 3;
+        }
+    }
+    else {
+        type = std::rand() % 4;
+    }
+
     switch (type) {
         case 0:
             foodType = FoodTypes::Type::BANANA;
@@ -27,9 +57,11 @@ std::unique_ptr<Food> FoodGenerator::generateRandomFood() {
             break;
         case 2:
             foodType = FoodTypes::Type::POISON_APPLE;
+            poisoned_counter += 1;
             break;
         case 3:
             foodType = FoodTypes::Type::BOMB;
+            bomb_counter += 1;
             break;
         default:
             foodType = FoodTypes::Type::BANANA;

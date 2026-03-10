@@ -6,6 +6,7 @@
 #include "Board.h"
 
 class FoodGenerator : public GameField {
+    int bomb_counter, poisoned_counter,  counter_gen;
 public:
     FoodGenerator(int x, int y);
 

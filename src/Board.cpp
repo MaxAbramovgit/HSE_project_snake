@@ -1,7 +1,6 @@
 #include "../include/Board.h"
 #include "../include/Snake.h"
 #include <iostream>
-
 #include "FoodTypes.h"
 
 Board::Board(int x, int y)  : GameField(x, y) {
