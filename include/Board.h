@@ -14,7 +14,7 @@ public:
     Board(int x, int y);
 
     int GetHeight() const override;
-    int GetWidth() const  override;
+    int GetWidth() const override;
 
     Snake& getSnake() const;
 
@@ -24,10 +24,11 @@ public:
 
     void setFood(std::unique_ptr<Food> food);
 
-    ~Board() = default;
+
 
     void update();
 
     int getScore() const;
 
+    virtual ~Board();
 };
