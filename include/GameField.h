@@ -7,9 +7,9 @@ protected:
 public:
     GameField(int x, int y);
 
-    virtual int GetWidth();
+    virtual int GetWidth() const ;
 
-    virtual int GetHeight();
+    virtual int GetHeight() const;
 
     virtual ~GameField() = default;
 };

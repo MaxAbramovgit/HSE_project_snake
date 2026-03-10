@@ -6,10 +6,10 @@
 
 GameField::GameField(int w, int h) : width(w), height(h) {}
 
-int GameField::GetWidth(){
+int GameField::GetWidth() const {
     return width;
 }
 
-int GameField::GetHeight() {
+int GameField::GetHeight() const {
     return height;
 }

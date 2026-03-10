@@ -13,8 +13,8 @@ class Board : public GameField {
 public:
     Board(int x, int y);
 
-    int GetHeight() override;
-    int GetWidth() override;
+    int GetHeight() const override;
+    int GetWidth() const  override;
 
     Snake& getSnake() const;
 
