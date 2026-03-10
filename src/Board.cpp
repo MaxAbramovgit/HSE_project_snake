@@ -28,6 +28,14 @@ bool Board::isGameOver() const {
         return over;
 }
 
+int Board::GetWidth() const {
+    return width;
+}
+
+int Board::GetHeight() const {
+    return height;
+}
+
 void Board::setFood(std::unique_ptr<Food> food) {
     this->food = std::move(food);
 }
