@@ -5,7 +5,7 @@
 int main() {
     try
     {
-        Game game(30, 25);
+        Game game(30, 20);
         game.run();
     }
 

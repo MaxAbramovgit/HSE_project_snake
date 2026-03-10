@@ -14,7 +14,7 @@ private:
     bool running;
 
 public:
-    Game(int width = 30, int height = 25);
+    Game(int width = 30, int height = 20);
 
     void handleInput();
 

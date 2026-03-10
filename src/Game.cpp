@@ -7,7 +7,7 @@
 
 Game::Game(int width, int height) : board(width, height),
     foodgenerator(board.GetWidth(), board.GetHeight()),
-    renderer(board, 20),
+    renderer(board, 25),
     running(true)
 {
     for (int i = 0; i < 5; ++i)
