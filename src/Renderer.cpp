@@ -111,6 +111,7 @@ void Renderer::render()
 
 void Renderer::renderGameOver()
 {
+    window.clear(sf::Color::Black);
     window.draw(gameOverText);
     window.display();
 }
