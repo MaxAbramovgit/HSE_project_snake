@@ -107,7 +107,7 @@ bool Game::isRunning() const
 
 void Game::run()
 {
-    constexpr int frameDelay = 200; // 200 миллисекунд будет между кадрами
+    constexpr int frameDelay = 150; // 200 миллисекунд будет между кадрами
 
     while(isRunning())
     {

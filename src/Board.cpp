@@ -65,8 +65,9 @@ void Board::update() {
     for (auto it = food.begin(); it != food.end(); ) {
         if (headX == (*it)->getX() && headY == (*it)->getY()) {
             (*it)->applyEffect(*snake);
-            score += (*it)->getPoints();
+            score += (*it)->getPoints() + 10;
             it = food.erase(it);
+
             return;
         } else {
             ++it;
