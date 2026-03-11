@@ -12,7 +12,13 @@ Renderer::Renderer(const Board& otherboard, int cellSize)
         otherboard.GetHeight() * cellSize),
         "Snake Game")
 {
-    if (!font.loadFromFile("arialmt.ttf"))
+
+    bananaTex.loadFromFile("../assets/BANANA.png");
+    bombTex.loadFromFile("../assets/BOMB.png");
+    poisonTex.loadFromFile("../assets/APPLE.png");
+    burgerTex.loadFromFile("../assets/BURGER.png");
+
+    if (!font.loadFromFile("../assets/arial.ttf"))
     {
         std::cerr << "Warning: could not load Arial.ttf" << std::endl;
     }
@@ -29,6 +35,13 @@ Renderer::Renderer(const Board& otherboard, int cellSize)
 
     gameOverText.setPosition(static_cast<float>(window.getSize().x) / 2.0f - 100.0f,
         static_cast<float>(window.getSize().y) / 2.0f - 20.0f);
+
+    gameOverText_score.setFont(font);
+    gameOverText_score.setCharacterSize(30);
+    gameOverText_score.setFillColor(sf::Color::White);
+
+    gameOverText_score.setPosition(static_cast<float>(window.getSize().x) / 2.0f - 61.0f,
+        static_cast<float>(window.getSize().y) / 2.0f - 60.0f);
 }
 
 void Renderer::render()
@@ -89,26 +102,31 @@ void Renderer::render()
     {
         if (auto* foodType = dynamic_cast<FoodTypes*>(food.get()))
         {
-            sf::RectangleShape cell(sf::Vector2f(static_cast<float>(cellSize - 2), static_cast<float>(cellSize - 2)));
-
-            cell.setPosition(static_cast<float>(food->getX() * cellSize + 1), static_cast<float>(food->getY() * cellSize + 1));
-
             switch(foodType->getType())
             {
             case FoodTypes::Type::BANANA:
-                cell.setFillColor(sf::Color::Yellow);
+                foodSprite.setTexture(bananaTex);
                 break;
             case FoodTypes::Type::HAMBURGER:
-                cell.setFillColor(sf::Color(165, 42, 42));
+                foodSprite.setTexture(burgerTex);
                 break;
             case FoodTypes::Type::BOMB:
-                cell.setFillColor(sf::Color::Blue);
+                foodSprite.setTexture(bombTex);
                 break;
             case FoodTypes::Type::POISON_APPLE:
-                cell.setFillColor(sf::Color::Red);
+                foodSprite.setTexture(poisonTex);
                 break;
             }
-            window.draw(cell);
+
+            foodSprite.setPosition(static_cast<float>(food->getX() * cellSize + 1),
+                static_cast<float>(food->getY() * cellSize + 1));
+
+            float scaleX = static_cast<float>(cellSize - 2) / foodSprite.getLocalBounds().width;
+            float scaleY = static_cast<float>(cellSize - 2) / foodSprite.getLocalBounds().height;
+
+            foodSprite.setScale(scaleX, scaleY);
+
+            window.draw(foodSprite);
         }
     }
 
@@ -121,6 +139,8 @@ void Renderer::renderGameOver()
 {
     window.clear(sf::Color::Black);
     window.draw(gameOverText);
+    gameOverText_score.setString("Score: " + std::to_string(board.getScore()));
+    window.draw(gameOverText_score);
     window.display();
 }
 

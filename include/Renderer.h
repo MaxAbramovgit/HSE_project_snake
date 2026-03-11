@@ -12,7 +12,14 @@ private:
     sf::Font font;
     sf::Text scoreText;
     sf::Text gameOverText;
+    sf::Text gameOverText_score;
 
+    sf::Texture bananaTex;
+    sf::Texture burgerTex;
+    sf::Texture bombTex;
+    sf::Texture poisonTex;
+
+    sf::Sprite foodSprite;
 
 public:
     explicit Renderer(const Board& newboard, int cellSize = 30);
