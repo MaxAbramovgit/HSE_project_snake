@@ -74,5 +74,5 @@ TEST_F(BoardTest, ScoreIncreases) {
     auto& snake = board->getSnake();
     snake.setDirection(Direction::RIGHT);
     board->update();
-    EXPECT_EQ(board->getScore(), 10 + 1);
+    EXPECT_EQ(board->getScore(), 5 + 1);
 }

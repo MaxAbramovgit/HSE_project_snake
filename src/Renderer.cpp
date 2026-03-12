@@ -12,12 +12,10 @@ Renderer::Renderer(const Board& otherboard, int cellSize)
         otherboard.GetHeight() * cellSize),
         "Snake Game")
 {
-
     bananaTex.loadFromFile("../assets/BANANA.png");
     bombTex.loadFromFile("../assets/BOMB.png");
     poisonTex.loadFromFile("../assets/APPLE.png");
     burgerTex.loadFromFile("../assets/BURGER.png");
-
     if (!font.loadFromFile("../assets/arial.ttf"))
     {
         std::cerr << "Warning: could not load Arial.ttf" << std::endl;
@@ -32,21 +30,20 @@ Renderer::Renderer(const Board& otherboard, int cellSize)
     gameOverText.setCharacterSize(40);
     gameOverText.setFillColor(sf::Color::Red);
     gameOverText.setString("GAME OVER!");
-
     gameOverText.setPosition(static_cast<float>(window.getSize().x) / 2.0f - 100.0f,
         static_cast<float>(window.getSize().y) / 2.0f - 20.0f);
 
     gameOverText_score.setFont(font);
     gameOverText_score.setCharacterSize(30);
     gameOverText_score.setFillColor(sf::Color::White);
-
     gameOverText_score.setPosition(static_cast<float>(window.getSize().x) / 2.0f - 61.0f,
         static_cast<float>(window.getSize().y) / 2.0f - 60.0f);
+
 }
 
 void Renderer::render()
 {
-    window.clear(sf::Color::Black);
+    window.clear(sf::Color(0,0, 0));
 
     sf::VertexArray grid(sf::Lines);
 
@@ -104,26 +101,28 @@ void Renderer::render()
         {
             switch(foodType->getType())
             {
-            case FoodTypes::Type::BANANA:
-                foodSprite.setTexture(bananaTex);
-                break;
-            case FoodTypes::Type::HAMBURGER:
-                foodSprite.setTexture(burgerTex);
-                break;
-            case FoodTypes::Type::BOMB:
-                foodSprite.setTexture(bombTex);
-                break;
-            case FoodTypes::Type::POISON_APPLE:
-                foodSprite.setTexture(poisonTex);
-                break;
+                case FoodTypes::Type::BANANA:
+                    foodSprite.setTexture(bananaTex);
+                    break;
+                case FoodTypes::Type::HAMBURGER:
+                    foodSprite.setTexture(burgerTex);
+                    break;
+                case FoodTypes::Type::BOMB:
+                    foodSprite.setTexture(bombTex);
+                    break;
+                case FoodTypes::Type::POISON_APPLE:
+                    foodSprite.setTexture(poisonTex);
+                    break;
             }
 
-            foodSprite.setPosition(static_cast<float>(food->getX() * cellSize + 1),
-                static_cast<float>(food->getY() * cellSize + 1));
+            foodSprite.setPosition(
+                static_cast<float>(food->getX() * cellSize + 1),
+                static_cast<float>(food->getY() * cellSize + 1)
+            );
+
 
             float scaleX = static_cast<float>(cellSize - 2) / foodSprite.getLocalBounds().width;
             float scaleY = static_cast<float>(cellSize - 2) / foodSprite.getLocalBounds().height;
-
             foodSprite.setScale(scaleX, scaleY);
 
             window.draw(foodSprite);
@@ -158,3 +157,4 @@ bool Renderer::pollEvent(sf::Event& event)
 {
     return window.pollEvent(event);
 }
+
