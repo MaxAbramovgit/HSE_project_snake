@@ -1,6 +1,3 @@
-//
-// Created by Anastasia on 12.03.2026.
-//
 
 #include <gtest/gtest.h>
 #include "../include/GameEntity.h"
