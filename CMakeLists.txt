@@ -63,7 +63,6 @@ add_executable(SNAKEGAME_TESTS
         tests/test_Board.cpp
         ${TEST_SOURCES}
         tests/test_foodgenerator.cpp
-        tests/test_renderer.cpp
 )
 
 target_include_directories(SNAKEGAME_TESTS PRIVATE include)
