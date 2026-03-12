@@ -42,22 +42,33 @@ void Game::handleInput()
             switch(event.key.code)
             {
             case sf::Keyboard::W:
+                    snake.setDirection(Direction::UP);
+                    break;
             case sf::Keyboard::Up:
                 snake.setDirection(Direction::UP);
                 break;
             case sf::Keyboard::S:
+                    snake.setDirection(Direction::DOWN);
+                break;
             case sf::Keyboard::Down:
                 snake.setDirection(Direction::DOWN);
                 break;
             case sf::Keyboard::A:
+                    snake.setDirection(Direction::LEFT);
+                    break;
             case sf::Keyboard::Left:
                 snake.setDirection(Direction::LEFT);
                 break;
             case sf::Keyboard::D:
+                    snake.setDirection(Direction::RIGHT);
+                    break;
             case sf::Keyboard::Right:
                 snake.setDirection(Direction::RIGHT);
                 break;
             case sf::Keyboard::Q:
+                    running = false;
+                    renderer.close();
+                    break;
             case sf::Keyboard::Escape:
                 running = false;
                 renderer.close();

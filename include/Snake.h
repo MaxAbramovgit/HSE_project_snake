@@ -4,6 +4,7 @@
 #include <memory>
 #include "Segment.h"
 
+
 enum class Direction {UP, DOWN, LEFT, RIGHT};
 
 class Snake {

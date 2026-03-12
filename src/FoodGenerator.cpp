@@ -72,7 +72,7 @@ std::unique_ptr<Food> FoodGenerator::generateRandomFood() {
 
     return std::make_unique<FoodTypes>(x, y, foodType);
 }
-
+//!!!!!!
 std::optional<std::unique_ptr<Food>> FoodGenerator::generate(const Snake& snake) {
     const int maxAttempts = 1000;
     int attempts = 0;

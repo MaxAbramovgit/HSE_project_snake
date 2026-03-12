@@ -21,14 +21,12 @@ void Board::addFood(std::unique_ptr<Food> newfood) {
     food.push_back(std::move(newfood));
 }
 
-
 const std::vector<std::unique_ptr<Food>>&  Board::getFood() const {
     return food;
 }
 
-
 bool Board::isGameOver() const {
-        return over;
+    return over;
 }
 
 int Board::GetWidth() const {
@@ -51,6 +49,7 @@ void Board::update() {
     if (snake) {
         snake->move();
     }
+
     auto p = snake->getHeadPosition();
     int headX = p.first;
     int headY = p.second;

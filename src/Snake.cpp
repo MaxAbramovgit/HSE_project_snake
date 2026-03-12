@@ -69,6 +69,7 @@ void Snake::shrink() {
 }
 
 void Snake::die() {
+
     body.clear();
 }
 
