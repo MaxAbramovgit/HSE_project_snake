@@ -1,9 +1,4 @@
-#include <iostream>
-#include <vector>
 #include "../include/Renderer.h"
-#include "../include/Board.h"
-#include "../include/FoodTypes.h"
-#include <SFML/Graphics.hpp>
 
 Renderer::Renderer(const Board& otherboard, int cellSize)
     : board(otherboard),
@@ -49,7 +44,7 @@ void Renderer::render()
 
     for (int x = 0; x <= board.GetWidth(); ++x)
     {
-        float positionX = static_cast<float>(x * cellSize);
+        auto positionX = static_cast<float>(x * cellSize);
         grid.append(sf::Vertex(sf::Vector2f(positionX, 0.0f),
             sf::Color::White)); //добавляю вертикальные линии
         grid.append(sf::Vertex(sf::Vector2f(positionX, static_cast<float>(board.GetHeight() * cellSize)),
@@ -58,7 +53,7 @@ void Renderer::render()
 
     for (int y = 0; y <= board.GetHeight(); ++y)
     {
-        float positionY = static_cast<float>(y * cellSize);
+        auto positionY = static_cast<float>(y * cellSize);
         grid.append(sf::Vertex(sf::Vector2f(0.0f, positionY),
             sf::Color::White));
         grid.append(sf::Vertex(sf::Vector2f(static_cast<float>(board.GetWidth() * cellSize), positionY),

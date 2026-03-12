@@ -4,6 +4,9 @@
 #include "Board.h"
 #include <memory>
 #include <SFML/Graphics.hpp>
+#include "../include/Snake.h"
+#include <thread>
+#include <chrono>
 
 class Game
 {

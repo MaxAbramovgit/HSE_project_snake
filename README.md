@@ -133,3 +133,37 @@ HSE_project_snake/<br>
   * &nbsp;&nbsp;&nbsp;&nbsp; in FoodTypes.cpp : constexpr int BANANA_POINTS = 1;
   * &nbsp;&nbsp;&nbsp;&nbsp; in Game.cpp : constexpr int frameDelay = 200;
 
+## Build System - CMake
+* Requires CMake 3.20 or higher
+* C++ standard is C++23
+
+**In CMake automatically made:**
+* Downloads SFML: gets the graphics library
+* Downloads GoogleTest: gets the testing framework
+* Copies font files: puts .ttf files next to the game executable
+* Builds the game: compiles all src files
+* Builds tests: creates a separate test executable
+
+**Two Build Targets**
+1. Snake - main game: 
+   * &nbsp;&nbsp;&nbsp;&nbsp; compiles all source file from src/ directory
+   * &nbsp;&nbsp;&nbsp;&nbsp; includes headers from include/ directory
+   * &nbsp;&nbsp;&nbsp;&nbsp; links against SFML graphics, window, and system libraries
+   * &nbsp;&nbsp;&nbsp;&nbsp; automatically copies font files (.ttf) from assets/ to build directory
+
+2. SNAKEGAME_TESTS - runs all tests:
+   * &nbsp;&nbsp;&nbsp;&nbsp; builds all test files from tests/ directory
+   * &nbsp;&nbsp;&nbsp;&nbsp; excludes main.cpp to prevent duplicate entry points
+   * &nbsp;&nbsp;&nbsp;&nbsp; links against GoogleTest and SFML libraries
+   * &nbsp;&nbsp;&nbsp;&nbsp; automatically discovers and registers tests with CTest
+
+
+**Special flags for macOS-specific compiler flags**
+```
+if(APPLE)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_LIBCPP_DISABLE_AVAILABILITY")
+endif()
+```
+
+**Automatic Dependency Management**
+Our project uses CMake's FetchContent module to automatically download and build SFML and GoogleTest
