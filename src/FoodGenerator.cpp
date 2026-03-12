@@ -2,7 +2,8 @@
 #include "FoodTypes.h"
 #include <memory>
 #include <cstdlib>
-
+#include <ctime>
+#include <optional>
 
 int start(int a) {
     if (a == 1 || a == 2) {
@@ -11,6 +12,7 @@ int start(int a) {
     if (a == 0) {
         return 3;
     }
+    return 0;
 }
 
 FoodGenerator::FoodGenerator(int w, int h) : GameField(w, h) {
@@ -71,11 +73,17 @@ std::unique_ptr<Food> FoodGenerator::generateRandomFood() {
     return std::make_unique<FoodTypes>(x, y, foodType);
 }
 
-std::unique_ptr<Food> FoodGenerator::generate(const Snake& snake) {
-    while (true) {
+std::optional<std::unique_ptr<Food>> FoodGenerator::generate(const Snake& snake) {
+    const int maxAttempts = 1000;
+    int attempts = 0;
+
+    while (attempts < maxAttempts) {
         auto food = generateRandomFood();
         if (!snake.collidesWith(food->getX(), food->getY())) {
-            return food;
+            return std::move(food);
         }
+        attempts++;
     }
+
+    return std::nullopt;
 }

@@ -13,9 +13,8 @@ Game::Game(int width, int height) : board(width, height),
     for (int i = 0; i < 5; ++i)
     {
         auto newFood = foodgenerator.generate(board.getSnake());
-        if (newFood)
-        {
-            board.addFood(std::move(newFood));
+        if (newFood.has_value()) {
+                board.addFood(std::move(*newFood));
         }
     }
 }
@@ -84,10 +83,9 @@ void Game::update()
 
     if (newFoodCount < oldFoodCount)
     {
-        std::unique_ptr<Food> newFood = foodgenerator.generate(board.getSnake());
-        if (newFood)
-        {
-            board.addFood(std::move(newFood));
+        auto newFood = foodgenerator.generate(board.getSnake());
+        if (newFood.has_value()) {
+            board.addFood(std::move(*newFood));
         }
     }
 }
@@ -107,7 +105,7 @@ bool Game::isRunning() const
 
 void Game::run()
 {
-    constexpr int frameDelay = 200; // 200 миллисекунд будет между кадрами
+    constexpr int frameDelay = 150;
 
     while(isRunning())
     {

@@ -52,12 +52,20 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
+
+file(GLOB_RECURSE TEST_SOURCES src/*.cpp)
+list(REMOVE_ITEM TEST_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
+
 add_executable(SNAKEGAME_TESTS
         tests/test_main.cpp
         tests/test_snake.cpp
         tests/test_food.cpp
-        ${SOURCES}
+        tests/test_Board.cpp
+        ${TEST_SOURCES}
+        tests/test_foodgenerator.cpp
+        tests/test_game_entity.cpp
 )
+
 target_include_directories(SNAKEGAME_TESTS PRIVATE include)
 target_link_libraries(SNAKEGAME_TESTS PRIVATE
         gtest_main
