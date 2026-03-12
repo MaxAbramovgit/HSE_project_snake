@@ -45,15 +45,15 @@ void Renderer::render()
 {
     window.clear(sf::Color(0,0, 0));
 
-    sf::VertexArray grid(sf::Lines);
+    sf::VertexArray grid(sf::Lines); //типо контейнер который имеет точки по которым идет линии
 
     for (int x = 0; x <= board.GetWidth(); ++x)
     {
         float positionX = static_cast<float>(x * cellSize);
         grid.append(sf::Vertex(sf::Vector2f(positionX, 0.0f),
-            sf::Color::White));
+            sf::Color::White)); //добавляю вертикальные линии
         grid.append(sf::Vertex(sf::Vector2f(positionX, static_cast<float>(board.GetHeight() * cellSize)),
-            sf::Color::White));
+            sf::Color::White)); // добавляю горизонтальные линии
     }
 
     for (int y = 0; y <= board.GetHeight(); ++y)
@@ -67,7 +67,7 @@ void Renderer::render()
 
     window.draw(grid);
 
-    const auto& snake = board.getSnake();
+    const auto& snake = board.getSnake(); //передается быстрее тк в getSnake ptr
     if (snake.isAlive())
     {
         const auto& body = snake.getBody();

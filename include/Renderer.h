@@ -22,11 +22,11 @@ private:
     sf::Sprite foodSprite;
 
 public:
-    explicit Renderer(const Board& newboard, int cellSize = 30);
+    explicit Renderer(const Board& newboard, int cellSize = 30); //чтобы нельзя было использоватб конструктор с одлним элементом
 
     void render();
     void renderGameOver();
     bool isOpen() const;
     void close();
-    bool pollEvent(sf::Event& event);
+    bool pollEvent(sf::Event& event); //описать что такое event
 };
