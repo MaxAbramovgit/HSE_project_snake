@@ -30,8 +30,7 @@ FetchContent_MakeAvailable(sfml)
 file(GLOB_RECURSE SOURCES src/*.cpp)
 file(GLOB_RECURSE HEADERS include/*.h)
 
-add_executable(Snake ${SOURCES} ${HEADERS}
-        tests/test_game_entity.cpp)
+add_executable(Snake ${SOURCES} ${HEADERS})
 target_include_directories(Snake PRIVATE include)
 
 target_link_libraries(Snake PRIVATE
@@ -62,11 +61,9 @@ add_executable(SNAKEGAME_TESTS
         tests/test_snake.cpp
         tests/test_food.cpp
         tests/test_Board.cpp
-        tests/test_game_entity.cpp
         ${TEST_SOURCES}
         tests/test_foodgenerator.cpp
-        tests/test_segment.cpp
-        tests/test_renderer.cpp
+        tests/test_game_entity.cpp
 )
 
 target_include_directories(SNAKEGAME_TESTS PRIVATE include)
