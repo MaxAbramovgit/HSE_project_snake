@@ -133,6 +133,51 @@ HSE_project_snake/<br>
   * &nbsp;&nbsp;&nbsp;&nbsp; in FoodTypes.cpp : constexpr int BANANA_POINTS = 1;
   * &nbsp;&nbsp;&nbsp;&nbsp; in Game.cpp : constexpr int frameDelay = 200;
 
+* **_std::optional: we used it in method FoodGenerator::generate() to handle the case when no free space is available for the new food to appear._**
+  * &nbsp;&nbsp;&nbsp;&nbsp; safety: if we would use just usual check with if and while(true) the we could have problems with the loop which would run forever trying to find extra space for new food to appear;
+  * &nbsp;&nbsp;&nbsp;&nbsp; clarity: with usual check there would be no way to tell the caller that food could not be generated;
+```
+std::optional<std::unique_ptr<Food>> FoodGenerator::generate(const Snake& snake) {
+    const int maxAttempts = 1000;
+    int attempts = 0;
+
+    while (attempts < maxAttempts) {
+        auto food = generateRandomFood();
+        if (!snake.collidesWith(food->getX(), food->getY())) {
+            return std::move(food);
+        }
+        attempts++;
+    }
+
+    return std::nullopt;
+}
+```
+
+* **_exceptions(try/catch/throw): we used it to have a proper error handling without crashing the program._**
+  * &nbsp;&nbsp;&nbsp;&nbsp; in Board class: a board should ALWAYS have a snake - otherwise there should be a mistake(UB).
+```
+Snake& Board::getSnake() const {
+  if (!snake) {
+    throw std::runtime_error("SNAKE IS EMPTY");
+  }
+  return *snake;
+}
+```
+  * &nbsp;&nbsp;&nbsp;&nbsp; in main.cpp: it trys to start the game - if fails then shows an error message istead of just crashing, it gives no resources leakages as it destroys all objects properly
+```
+    try
+    {
+        Game game(30, 20);
+        game.run();
+    }
+
+    catch (const std::exception& e)
+    {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
+```
+
 ## Build System - CMake
 * Requires CMake 3.20 or higher
 * C++ standard is C++23
