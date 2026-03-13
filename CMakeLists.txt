@@ -30,7 +30,7 @@ FetchContent_MakeAvailable(sfml)
 file(GLOB_RECURSE SOURCES src/*.cpp)
 file(GLOB_RECURSE HEADERS include/*.h)
 
-add_executable(Snake ${HEADERS})
+add_executable(Snake ${SOURCES} ${HEADERS})
 target_include_directories(Snake PRIVATE include)
 
 target_link_libraries(Snake PRIVATE
