@@ -1,9 +1,5 @@
 #include "FoodGenerator.h"
-#include "FoodTypes.h"
-#include <memory>
-#include <cstdlib>
-#include <ctime>
-#include <optional>
+
 
 int start(int a) {
     if (a == 1 || a == 2) {

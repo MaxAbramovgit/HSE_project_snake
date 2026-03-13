@@ -1,7 +1,4 @@
 #include "../include/Board.h"
-#include "../include/Snake.h"
-#include <iostream>
-#include "FoodTypes.h"
 
 Board::Board(int x, int y)  : GameField(x, y) {
     snake = std::make_unique<Snake>(x/2, y/2);

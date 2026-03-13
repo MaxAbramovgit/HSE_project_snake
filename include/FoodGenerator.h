@@ -4,6 +4,11 @@
 #include "GameField.h"
 #include "Snake.h"
 #include "Food.h"
+#include "FoodTypes.h"
+#include <memory>
+#include <cstdlib>
+#include <ctime>
+#include <optional>
 
 class FoodGenerator : public GameField {
     int counter_gen;

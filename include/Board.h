@@ -5,7 +5,6 @@
 #include "Food.h"
 #include <vector>
 
-#include "FoodTypes.h"
 
 class Board : public GameField {
     std::unique_ptr<Snake> snake;
