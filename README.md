@@ -217,3 +217,8 @@ endif()
 
 **Automatic Dependency Management**
 Our project uses CMake's FetchContent module to automatically download and build SFML and GoogleTest
+
+
+## Google Tests
+_Every class has its own test to check every method and find different mistakes and problems. In summary we have 57 tests. They check the initialisation, methods, summ and etc. As for renderer.h it also opens new windows and draw small field with snake. All classes our passed test successfully._
+![img_1.png](img_1.png)
