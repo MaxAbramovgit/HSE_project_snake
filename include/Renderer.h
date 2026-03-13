@@ -1,6 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Board.h"
+#include "../include/FoodTypes.h"
+#include <iostream>
+#include <vector>
 
 class Renderer
 {

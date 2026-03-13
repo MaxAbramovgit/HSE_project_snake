@@ -1,9 +1,4 @@
 #include "../include/Game.h"
-#include "../include/Snake.h"
-#include "../include/FoodGenerator.h"
-#include <thread>
-#include <chrono>
-
 
 Game::Game(int width, int height) : board(width, height),
     foodgenerator(board.GetWidth(), board.GetHeight()),
