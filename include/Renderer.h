@@ -8,7 +8,8 @@
 class Renderer
 {
 private:
-    const Board& board;
+    const Board& board;//renderer does not need to manage the game logic(needs just to look on it to draw)
+    //- that is why we have only reference, not the exact element (it also saves the memory)
     int cellSize;
     sf::RenderWindow window;
 
@@ -25,11 +26,13 @@ private:
     sf::Sprite foodSprite;
 
 public:
-    explicit Renderer(const Board& newboard, int cellSize = 30); //чтобы нельзя было использоватб конструктор с одлним элементом
+    explicit Renderer(const Board& newboard, int cellSize = 30); //чтобы нельзя было использовать конструктор с одним элементом
 
-    void render();
-    void renderGameOver();
-    bool isOpen() const;
-    void close();
-    bool pollEvent(sf::Event& event); //описать что такое event
+    void render();//draws everything - grid, food
+    void renderGameOver();//shows "Game Over" and "score"
+    bool isOpen() const;//checks if window is open
+    void close();//closes the window
+    bool pollEvent(sf::Event& event); //sf::event - its union structure, it represents interactions between user and window.
+    //Shows that smth happened - for example game opened/closed
+
 };

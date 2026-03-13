@@ -42,16 +42,16 @@ void Renderer::render()
 
     sf::VertexArray grid(sf::Lines); //типо контейнер который имеет точки по которым идет линии
 
-    for (int x = 0; x <= board.GetWidth(); ++x)
+    for (int x = 0; x <= board.GetWidth(); ++x)// добавляю вертикальные линии
     {
         auto positionX = static_cast<float>(x * cellSize);
         grid.append(sf::Vertex(sf::Vector2f(positionX, 0.0f),
-            sf::Color::White)); //добавляю вертикальные линии
+            sf::Color::White));
         grid.append(sf::Vertex(sf::Vector2f(positionX, static_cast<float>(board.GetHeight() * cellSize)),
-            sf::Color::White)); // добавляю горизонтальные линии
+            sf::Color::White));
     }
 
-    for (int y = 0; y <= board.GetHeight(); ++y)
+    for (int y = 0; y <= board.GetHeight(); ++y)//добавляю горизонтальные линии
     {
         auto positionY = static_cast<float>(y * cellSize);
         grid.append(sf::Vertex(sf::Vector2f(0.0f, positionY),
@@ -66,14 +66,16 @@ void Renderer::render()
     if (snake.isAlive())
     {
         const auto& body = snake.getBody();
-        sf::RectangleShape cell(sf::Vector2f(static_cast<float>(cellSize - 2), static_cast<float>(cellSize - 2)));
+        sf::RectangleShape cell(sf::Vector2f(static_cast<float>(cellSize - 2),
+         static_cast<float>(cellSize - 2)));
 
         for (size_t i = 0; i < body.size(); ++i)
         {
             int x = body[i]->getX();
             int y = body[i]->getY();
 
-            cell.setPosition(static_cast<float>(x * cellSize + 1), static_cast<float>(y * cellSize + 1));
+            cell.setPosition(static_cast<float>(x * cellSize + 1),
+             static_cast<float>(y * cellSize + 1));
 
             if (i == 0)
             {
