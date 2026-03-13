@@ -14,7 +14,7 @@ int FoodTypes::getPoints()const{
             return HAMBURGER_POINTS;
         }
         case Type::POISON_APPLE: {
-            constexpr int POISON_POINTS = -1;
+            constexpr int POISON_POINTS = -1; //чтобы на этапе компилляции эти переменные сразу заровнялись и не тратили ни секунду времени (сейвит время) + inline дописать можно
             return POISON_POINTS;
         }
         case Type::BOMB: {
@@ -42,3 +42,4 @@ void FoodTypes::applyEffect(Snake &snake) {
             break;
     }
 }
+//нельзя статистический тк метод каждый разный свой food_type (про case)

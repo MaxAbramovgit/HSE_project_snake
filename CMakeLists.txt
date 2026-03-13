@@ -67,6 +67,7 @@ add_executable(SNAKEGAME_TESTS
         tests/test_segment.cpp
         tests/test_renderer.cpp
         tests/test_game.cpp
+        tests/test_foodtypes.cpp
 )
 
 target_include_directories(SNAKEGAME_TESTS PRIVATE include)
