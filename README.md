@@ -50,8 +50,13 @@ HSE_project_snake/<br>
 |&nbsp;&nbsp;&nbsp;&nbsp;|--Snake.cpp<br>
 |&nbsp;&nbsp;&nbsp;&nbsp;|--main.cpp<br>
 |--tests/<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;|--test_board.cpp<br>
 |&nbsp;&nbsp;&nbsp;&nbsp;|--test_food.cpp<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;|--test_foodgenerator.cpp<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;|--test_game_entity.cpp<br>
 |&nbsp;&nbsp;&nbsp;&nbsp;|--test_main.cpp<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;|--test_renderer.cpp<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;|--test_segment.cpp<br>
 |&nbsp;&nbsp;&nbsp;&nbsp;|--test_snake.cpp<br>
 |--CMakeLists.txt/<br>
 |--README.md/<br>
@@ -115,7 +120,7 @@ HSE_project_snake/<br>
   * &nbsp;&nbsp;&nbsp;&nbsp; inherited by Board and FoodGenerator<br>
 
 ## Class Relationships
-![img_1.png](img_1.png)
+![img_2.png](img_2.png)
 
 ## Used Modern C++ Features
 * **_std:unique_ptr: we used it because it perfectly suited for polymorphic objects(ex: FoodTypes inherits from Food) and ensures single ownership with automatic cleanup._**
