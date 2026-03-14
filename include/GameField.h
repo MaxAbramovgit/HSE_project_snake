@@ -5,11 +5,11 @@ protected:
     int height;
     int width;
 public:
-    GameField(int x, int y);
+    GameField(int x, int y); //constructor
 
-    virtual int GetWidth() const ;
+    virtual int GetWidth() const; //return width
 
-    virtual int GetHeight() const;
+    virtual int GetHeight() const; //return height
 
-    virtual ~GameField() = default;
+    virtual ~GameField() = default; //destructor
 };

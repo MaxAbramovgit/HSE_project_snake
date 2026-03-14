@@ -12,24 +12,24 @@ class Board : public GameField {
     bool over;
     int score;
 public:
-    Board(int x, int y);
+    Board(int x, int y); //constructor
 
-    void addFood(std::unique_ptr<Food> newfood);
+    void addFood(std::unique_ptr<Food> newfood); //adds new food to constructor
 
-    int GetHeight() const override;
-    int GetWidth() const override;
+    int GetHeight() const override; //return height
+    int GetWidth() const override; //return width
 
-    Snake& getSnake() const;
+    Snake& getSnake() const; //return pointer to the snake
 
-    const std::vector<std::unique_ptr<Food>>&  getFood() const;
+    const std::vector<std::unique_ptr<Food>>&  getFood() const; //return pointer to the vector of the food
 
-    bool isGameOver() const;
+    bool isGameOver() const; //return over
 
-    void update();
+    void update(); //updates frames
 
-    int getScore() const;
+    int getScore() const; //returns score
 
-    bool isCellOccupiedByFood(int x, int y) const;
+    bool isCellOccupiedByFood(int x, int y) const; //checks if cell is occupied by food
 
-    ~Board() override;
+    ~Board() override; //destructor
 };

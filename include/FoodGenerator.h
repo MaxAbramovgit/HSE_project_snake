@@ -15,8 +15,8 @@ class FoodGenerator : public GameField {
     int poisoned_counter;
     int bomb_counter;
 public:
-    FoodGenerator(int w, int h);
+    FoodGenerator(int w, int h); //constructor
 
-    std::optional<std::unique_ptr<Food>> generate(const Snake& snake);
-    std::unique_ptr<Food> generateRandomFood();
+    std::optional<std::unique_ptr<Food>> generate(const Snake& snake); //generates food
+    std::unique_ptr<Food> generateRandomFood(); //add food to vector
 };
