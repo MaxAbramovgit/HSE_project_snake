@@ -1,0 +1,119 @@
+Anastasia (9):
+      creation of GameEntity and Segment classes
+      Using pragma
+      adding Shake.h
+      adding Shake.cpp
+      adding protection from an empty snake in Snake.cpp in collidesWithSelf()
+      editing Segment.h - deleting ghost effect
+      editing Segment.cpp - deleting division into different segments (normal and ghost)
+      new parametr a (no point in)
+      Не видно коммиты анастасии
+
+Mania-s (12):
+      change in FoodTypes and comments about functions
+      i rewrote FoodTypes.cpp using switch
+      bug fixed + in FoodTypes another names rewritten as in GameEntity
+      private for protected
+      getType added
+      i have applied an applyEffect to FoodTypes
+      changed protected to public in FoodTypes and added Food.h
+      change in register (getPoints)
+      added constexpr
+      rechange in constexpr
+      rechange in constexpr
+      redone the mistake w constexpr
+
+MaxAbramovgit (28):
+      Create .gitignore
+      CMakeLists.txt
+      Add files via upload
+      Add files via upload
+      Trying to solve the problem with commits
+      We managed to delete Cmake in src and include
+      Merge remote-tracking branch 'origin/main'
+      Improve FoodGenerator class, generaterendomFood will be ready, when sophie will end her part
+      Redone the mistake in Board.cpp and FoodGenerator.cpp
+      Merge remote-tracking branch 'origin/main'
+      FoodGenerator.cpp\
+      Added test folder with tests files, we need to do something with sfml and google test, because there is some problem between these to packages.
+      Correct some mistakes, that were found by google test
+      Added const methods
+      Added destructor to Board.cpp
+      Merge remote-tracking branch 'origin/main'
+      Added getters
+      Some little changes in Board class to have several fruits
+      Merge remote-tracking branch 'origin/main'
+      Board.cpp
+      Fixed the issue with generating identical food(bombs, poisoned apples)
+      Made some test on our classses
+      Merge remote-tracking branch 'origin/main'
+      foodgenerator and food testing system, changed a little bit Renderer.cpp, and added std::optional to board cpp (and rewritten rendererer to check if food has a value)
+      Made testing file for renderer
+      changed severall classes becase of std::optional in foodgeneratir
+      Merge remote-tracking branch 'origin/main'
+      added test to cmake
+
+eeelkina (26):
+      add main.cpp
+      add class game + CMake
+      Add Renderer class
+      i wrote Game and Renderer Headers
+      Little changes
+      i ve made some change
+      Remove SFML folder from root and update gitignore
+      changed sfml font
+      rechanged some mistakes in renderer and game
+      changed some things in Renderer
+      some more mistakes where corrected
+      corrected mistakes which where found when i used google test
+      corrected mistakes which where found when i used google test
+      corrected mistake
+      changed colour of snake
+      after starting the game i decided to shange the size of the window, add white grid and make cells smaller and more of them
+      we decided to make more food on the window
+      some changes
+      used for loop in Renderer.cpp to check food
+      changed FoodTypes switchcases
+      added new font
+      i used textures - pictures of burger, banana, apple and bomb. Added score text in the end and used special font
+      i almost wrote all README.md
+      Merge remote-tracking branch 'origin/main'
+      i added comments for easier understanding of my code
+      put all includes in headers instead of cpp files. wrote some more info in README.md
+
+max abramov (8):
+      I added my classes Board and FoodGenerator
+      Little changes
+      Changing the CMakeList.txt
+      I started working on GameField and Board class
+      improved my Board class
+      improved board.h
+      Checked for mistakes
+      Deleted field in FoodGenerator
+
+nastya-sla (18):
+      I also have problems with commits
+      I HAVE PROBLEMS WITH COMMITS
+      check snake length (if only the head(1) - it can't crash into itself)
+      Merge remote-tracking branch 'origin/main'
+      deleting unused parametr a
+      little changes - correcting Segment.cpp
+      I have priblems with commits - there is no anything before 3rd of March, they were marked gray, so I decided to re-commit my work
+      adding GameEntity - base class that stores coordinates (x, y) and provides virtual methods (destructor and getSymbol()) for all game objects to enable polymorphism and proper inheritance
+      adding Segment class - the heir of GameEntity — represents a part of the snake's body
+      adding class Snake - manages the snake's body segments, movement, growth, shrinking, death, score, and collision detection with itself or other objects
+      adding Snake.cpp with implementation of all functions
+      i forgot about function resetScore - adding it
+      creation of test_segment.cpp
+      adding test for Segment class (test was passed successfully)
+      creation of test_game_entity.cpp
+      adding test for Segment class - test paseed successfully
+      made my own testing file for game entity
+      made my own testing file for game entity
+
+sophie (4):
+      Food.h FoodTypes.h
+      Some changes
+      Foodtypes types of food
+      Food is rewritten, plus has an inheritance
+
