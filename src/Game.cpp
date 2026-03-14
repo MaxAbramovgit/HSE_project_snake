@@ -89,9 +89,20 @@ void Game::update()
 
     if (newFoodCount < oldFoodCount)
     {
-        auto newFood = foodgenerator.generate(board.getSnake());
-        if (newFood.has_value()) {
-            board.addFood(std::move(*newFood));
+        int attempts = 0;
+        const int maxAttempts = 50;
+        while (attempts < maxAttempts) {
+            auto newFood = foodgenerator.generate(board.getSnake());
+            if (!newFood.has_value()) {
+                attempts++;
+                continue;
+            }
+
+            if (!board.isCellOccupiedByFood((*newFood)->getX(), (*newFood)->getY())) {
+                board.addFood(std::move(*newFood));
+                return;
+            }
+            attempts++;
         }
     }
 }

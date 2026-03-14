@@ -29,5 +29,7 @@ public:
 
     int getScore() const;
 
+    bool isCellOccupiedByFood(int x, int y) const;
+
     ~Board() override;
 };

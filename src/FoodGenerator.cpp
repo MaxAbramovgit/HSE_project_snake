@@ -1,7 +1,7 @@
 #include "FoodGenerator.h"
 
 
-int start(int a) {
+int start(int a) {// this function is made to understand what types of food should be generated at the begining of th game
     if (a == 1 || a == 2) {
         return 2;
     }
@@ -11,7 +11,7 @@ int start(int a) {
     return 0;
 }
 
-FoodGenerator::FoodGenerator(int w, int h) : GameField(w, h) {
+FoodGenerator::FoodGenerator(int w, int h) : GameField(w, h) { //constructor
     counter_gen = 0;
     static bool seeded = false;
     poisoned_counter = 0;
@@ -22,7 +22,7 @@ FoodGenerator::FoodGenerator(int w, int h) : GameField(w, h) {
     }
 }
 
-std::unique_ptr<Food> FoodGenerator::generateRandomFood() {
+std::unique_ptr<Food> FoodGenerator::generateRandomFood() { //generates food (without checking the collision with snake)
     int x = std::rand() % GetWidth();
     int y = std::rand() % GetHeight();
     int type;
@@ -68,8 +68,7 @@ std::unique_ptr<Food> FoodGenerator::generateRandomFood() {
 
     return std::make_unique<FoodTypes>(x, y, foodType);
 }
-//!!!!!!
-std::optional<std::unique_ptr<Food>> FoodGenerator::generate(const Snake& snake) {
+std::optional<std::unique_ptr<Food>> FoodGenerator::generate(const Snake& snake) { //gives a std:move of coordinates and type of the food, i it doesnt generates on snake
     const int maxAttempts = 1000;
     int attempts = 0;
 
